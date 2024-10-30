@@ -33,7 +33,7 @@ export default function Index() {
 
         <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
           {data.results.map((movie) => (
-            <div className="flex flex-col overflow-hidden rounded-lg border bg-white">
+            <div className="transition duration-200 hover:shadow-md flex flex-col overflow-hidden rounded-lg border bg-white">
               <Link prefetch="intent" className="group relative block h-48 overflow-hidden bg-gray-100 md:h-64" to={`movie/${movie.id}/comments`}>
                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
               </Link>
@@ -41,6 +41,7 @@ export default function Index() {
                 <h2 className="mb-2 text-lg font-semibold text-gray-800">
                   <Link className="transition duration-200 hover:text-indigo-500 active:text-indigo-600" to={`movie/${movie.id}/comments`}>{movie.title}</Link>
                 </h2>
+                <p className="text-gray-500 line-clamp-3">{movie.overview}</p>
               </div>
             </div>
           ))}
