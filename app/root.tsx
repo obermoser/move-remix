@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import "@fontsource-variable/inter/index.css";
+import "@fontsource/poppins/index.css";
 import "./tailwind.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {

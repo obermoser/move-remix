@@ -1,5 +1,5 @@
 import { json, LoaderFunctionArgs } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const url = await fetch(`https://api.themoviedb.org/3/movie/${params.id}?language=de-DE`, {
@@ -38,6 +38,11 @@ export default function MovieId() {
                         <p className="leading-7"><span className="underline">Overview: <br /></span>{data.overview}</p>
                         <p><span className="underline">Release: {" "}</span>{new Date(data.release_date).toLocaleDateString("de-DE")}</p>
                     </h1>
+                </div>
+
+
+                <div className="w-1/2">
+                    <Outlet />
                 </div>
             </div>
         </div>
