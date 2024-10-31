@@ -5,12 +5,17 @@ import { prisma } from '../utils/db.server'
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const data = await prisma.comment.findMany({
+        cacheStrategy: {
+            swr: 60,
+            ttl: 60
+        },
         where: {
             movieId: params.id
         },
         orderBy: {
             createdAt: "desc"
-        }
+        },
+        take: 20,
     })
 
     return json({ data })
@@ -22,6 +27,11 @@ export async function action({ request }: ActionFunctionArgs) {
         data: {
             message: formData.get('comment') as string,
             movieId: formData.get('id') as string
+        },
+        select:{
+            id:true,
+            message:true,
+            movieId:true
         }
     })
     return json({ data });

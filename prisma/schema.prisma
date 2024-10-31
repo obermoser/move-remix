@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["tracing"]
 }
 
 datasource db {
@@ -18,4 +19,5 @@ model Comment {
   message   String
   createdAt DateTime @default(now())
   movieId   String
+  @@index([movieId])
 }
