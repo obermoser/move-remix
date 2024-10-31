@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
-import { LoaderFunctionArgs } from "@remix-run/node";
-import { Form, json, useLoaderData, useParams } from "@remix-run/react";
-import { prisma } from '../db.server'
+import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { Form, json, useLoaderData, useNavigation, useParams } from "@remix-run/react";
+import { prisma } from '../utils/db.server'
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const data = await prisma.comment.findMany({
@@ -16,10 +16,22 @@ export async function loader({ params }: LoaderFunctionArgs) {
     return json({ data })
 }
 
+export async function action({ request }: ActionFunctionArgs) {
+    const formData = await request.formData();
+    const data = await prisma.comment.create({
+        data: {
+            message: formData.get('comment') as string,
+            movieId: formData.get('id') as string
+        }
+    })
+    return json({ data });
+}
+
 
 export default function MovieComments() {
     const { id } = useParams()
     const { data } = useLoaderData<typeof loader>();
+    const navigation = useNavigation();
     return (
         <div className="rounded-lg border p-4">
             <h1 className="text-xl font-regular mb-8 pb-8">

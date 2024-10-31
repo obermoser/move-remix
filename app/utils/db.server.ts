@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 let prisma: PrismaClient;
 
 declare global {
-    var prisma: PrismaClient;
+    let prisma: PrismaClient;
 }
 
 // this is needed because in development we don't want to restart
