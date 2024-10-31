@@ -17,7 +17,7 @@ export default function MovieId() {
     const data = useLoaderData<typeof loader>();
     return (
         <div className="min-h-screen p-10">
-            <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} className="h-[40vh] object-cover object-center w-full rounded-lg shadow-md" alt="" />
+            <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}?api_key=8dc8f8536d3d3e74ba48381f642fffd6`} className="h-[40vh] object-cover object-center w-full rounded-lg shadow-md" alt="" />
             <h1 className="text-4xl font-bold text-center pt-5">
                 {data.title}
             </h1>

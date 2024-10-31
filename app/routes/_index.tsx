@@ -35,7 +35,7 @@ export default function Index() {
           {data.results.map((movie) => (
             <div className="transition duration-200 hover:shadow-md flex flex-col overflow-hidden rounded-lg border bg-white">
               <Link prefetch="intent" className="group relative block h-48 overflow-hidden bg-gray-100 md:h-64" to={`movie/${movie.id}/comments`}>
-                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}?api_key=8dc8f8536d3d3e74ba48381f642fffd6`} alt={movie.title} className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
               </Link>
               <div className="flex flex-1 flex-col p-4 sm:p-6">
                 <h2 className="mb-2 text-lg font-semibold text-gray-800">
