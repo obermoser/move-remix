@@ -11,7 +11,7 @@ declare global {
 // create a new connection to the DB with every change either.
 // in production we'll have a single connection to the DB.
 if (process.env.NODE_ENV === "production") {
-    prisma = new PrismaClient().$extends(withOptimize({ apiKey: process.env.PRISMA_OPTIMIZE_KEY as string })).$extends(withAccelerate());
+    prisma = new PrismaClient().$extends(withAccelerate());
 } else {
     if (!global.prisma) {
         global.prisma = new PrismaClient().$extends(withAccelerate());
