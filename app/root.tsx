@@ -9,6 +9,17 @@ import {
 
 import "@fontsource/poppins/index.css";
 import "./tailwind.css";
+import { LinksFunction } from "@remix-run/node";
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "icon",
+      href: "/favicon.png",
+      type: "image/png"
+    }
+  ]
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
