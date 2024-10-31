@@ -18,7 +18,7 @@ export default function MovieId() {
     return (
         <div className="min-h-screen p-10">
             <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}?api_key=8dc8f8536d3d3e74ba48381f642fffd6`} className="h-[40vh] object-cover object-center w-full rounded-lg shadow-md" alt="" />
-            <h1 className="text-4xl font-bold text-center pt-5">
+            <h1 key={data.id} className="text-4xl font-bold text-center pt-5">
                 {data.title}
             </h1>
             <div className="flex gap-x-10 mt-10">

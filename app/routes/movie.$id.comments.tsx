@@ -6,8 +6,8 @@ import { prisma } from '../utils/db.server'
 export async function loader({ params }: LoaderFunctionArgs) {
     const data = await prisma.comment.findMany({
         cacheStrategy: {
-            swr: 60,
-            ttl: 60
+            swr: 150,
+            ttl: 3600
         },
         where: {
             movieId: params.id
@@ -28,10 +28,10 @@ export async function action({ request }: ActionFunctionArgs) {
             message: formData.get('comment') as string,
             movieId: formData.get('id') as string
         },
-        select:{
-            id:true,
-            message:true,
-            movieId:true
+        select: {
+            id: true,
+            message: true,
+            movieId: true
         }
     })
     return json({ data });
@@ -47,11 +47,17 @@ export default function MovieComments() {
             <h1 className="text-xl font-regular mb-8 pb-8">
                 <div>
                     <Form method="POST">
-                        <textarea name="comment" className="w-full mb-4 h-32 border border-teal-500 rounded-lg p-2" placeholder="not yet implemented">
+                        <textarea required name="comment" className="w-full mb-4 h-32 border border-teal-500 rounded-lg p-2" placeholder="Sag uns deine Meinung...">
 
                         </textarea>
                         <input type="hidden" name="id" value={id} />
-                        <button type="submit" className="border bg-teal-500 w-full px-4 py-2 rounded-lg text-white">Absenden</button>
+                        {navigation.state === "submitting" ? (
+                            <button type="button" disabled className="border bg-teal-100 w-full px-4 py-2 rounded-lg text-white">lade...</button>
+
+                        ) : (
+                            <button type="submit" className="border bg-teal-500 w-full px-4 py-2 rounded-lg text-white">Absenden</button>
+
+                        )}
                     </Form>
 
                     <div className="mt-5 flex flex-col gap-y-3">
@@ -62,7 +68,7 @@ export default function MovieComments() {
                         ))}
                     </div>
                 </div>
-            </h1>
-        </div>
+            </h1 >
+        </div >
     )
 }

@@ -1,6 +1,5 @@
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { PrismaClient } from "@prisma/client";
-import { withOptimize } from "@prisma/extension-optimize";
 let prisma: PrismaClient;
 
 declare global {
@@ -15,7 +14,8 @@ if (process.env.NODE_ENV === "production") {
     prisma = new PrismaClient().$extends(withOptimize({ apiKey: process.env.PRISMA_OPTIMIZE_KEY as string })).$extends(withAccelerate());
 } else {
     if (!global.prisma) {
-        global.prisma = new PrismaClient().$extends(withOptimize({ apiKey: process.env.PRISMA_OPTIMIZE_KEY as string })).$extends(withAccelerate());
+        global.prisma = new PrismaClient().$extends(withAccelerate());
+        //$extends(withOptimize({ apiKey: process.env.PRISMA_OPTIMIZE_KEY as string }))
     }
     prisma = global.prisma;
     prisma.$connect();
